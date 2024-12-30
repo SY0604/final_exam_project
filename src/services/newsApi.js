@@ -9,11 +9,22 @@ const newsApi = axios.create({
 });
 
 // Use environment variable for API key to improve security
-const API_KEY = '312226b6fffb495b89d92b2e08d6e4c4' // Replace this with your environment variable or fallback key
+const API_KEY = process.env.REACT_APP_NEWS_API_KEY || '312226b6fffb495b89d92b2e08d6e4c4'; // Fallback key
+
+// Check if the API key is available
+const checkApiKey = () => {
+    if (!API_KEY) {
+        console.error('Error: News API key is missing!');
+        throw new Error('Missing API key');
+    } else {
+        console.log('News API key is available:', API_KEY);
+    }
+};
 
 // Fetch top headlines
 export const fetchTopHeadlines = async (country = 'us') => {
     try {
+        checkApiKey();  // Check API key before making requests
         const endpoint = `/top-headlines?country=${country}&apiKey=${API_KEY}`;
         const response = await newsApi.get(endpoint);
 
@@ -36,6 +47,7 @@ export const fetchTopHeadlines = async (country = 'us') => {
 // Fetch news by query
 export const fetchNewsByQuery = async (query) => {
     try {
+        checkApiKey();  // Check API key before making requests
         const endpoint = `/everything?q=${query}&apiKey=${API_KEY}`;
         const response = await newsApi.get(endpoint);
 
@@ -55,11 +67,7 @@ export const fetchNewsByQuery = async (query) => {
     }
 };
 
-// Add a helper function to validate API key
+// Validate API key (throw error if not found)
 export const validateApiKey = () => {
-    if (!process.env.REACT_APP_NEWS_API_KEY) {
-        console.warn(
-            'Warning: Environment variable for News API key is missing. Using fallback key.'
-        );
-    }
+    checkApiKey();
 };
