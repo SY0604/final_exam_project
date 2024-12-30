@@ -1,3 +1,9 @@
+-The reason the API does not work in the deployed project is that the current NewsAPI subscription is on the Developer Plan, which is only meant for testing and development. This plan does not allow the API to be used in production environments, like the deployed project on Vercel.
+
+To make the API work in production, I would need to upgrade to a Production Plan, which costs $400. Without this upgrade, the API blocks requests from the deployed environment.
+
+
+
 News Website Project
 This project is a responsive React-based news website that integrates several API endpoints to fetch and display data dynamically. It includes features like user authentication (signup and login), a news search system, and category-based news filtering. The project leverages the Faux API for backend functionality.
 
