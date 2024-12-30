@@ -9,7 +9,7 @@ const newsApi = axios.create({
 });
 
 // Use environment variable for API key to improve security
-const API_KEY = process.env.REACT_APP_NEWS_API_KEY || '312226b6fffb495b89d92b2e08d6e4c4'; // Replace this with your environment variable or fallback key
+const API_KEY = '312226b6fffb495b89d92b2e08d6e4c4' // Replace this with your environment variable or fallback key
 
 // Fetch top headlines
 export const fetchTopHeadlines = async (country = 'us') => {
